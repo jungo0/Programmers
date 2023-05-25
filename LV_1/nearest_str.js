@@ -1,15 +1,20 @@
-function solution(numbers) {
-    var answer = [];
-    for ( let i = 0; i < numbers.length; i++) {
-      for ( let j = i + 1; j < numbers.length; j++) {
-        let sum = numbers[i] + numbers[j];
-        if( answer.indexOf(sum) === -1) {
-          answer.push(sum);
+function solution(s) {
+    let stack = [];
+    let ans = [];
+    
+    for(let i = 0; i < s.length; i++){
+        if(!stack.includes(s[i])){
+            ans.push(-1);
+            stack.push(s[i]);
+            continue;
         }
-      }
+        
+        if(stack.includes(s[i])){
+            ans.push(stack.length - stack.lastIndexOf(s[i]));
+            stack.push(s[i]);
+            continue;
+        }
     }
-    answer.sort(function(a,b) {
-      return a - b;
-    })
-    return answer;
+    
+    return ans;
 }
